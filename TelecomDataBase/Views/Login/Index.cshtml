@@ -15,22 +15,22 @@
             position:absolute;
             left:40%;
             top:40%;
-            border: 2px solid #ccc;
+            border: 3px solid #ccc;
             padding:10px 10px;
+             
+
             
         }
         .field-validation-error {
         color:red;
         }
        
+        }
         </style>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
 
 </head>
-<body   background-image ="C:\Users\Adrian\Documents\Licenta\TelecomDataBase\Content\background.png" >
+<body >
     <div> 
         <div id="login-div" >
             @using (Html.BeginForm("Autherize", "Login",FormMethod.Post))
@@ -41,7 +41,7 @@
                         <td style="text-decoration:underline"><dt>DataBase</dt></td>
                         </tr>
                     <tr>
-                        <td > 
+                        <td class="fa fa-user"> 
                           
                                  @Html.LabelFor(model=> model.UserName)
                          
@@ -53,11 +53,11 @@
                         </tr>
                     <tr>
                         <td></td>
-                        <td>@Html.ValidationMessageFor(model => model.UserName)</td>
+                        <td >@Html.ValidationMessageFor(model => model.UserName)</td>
                         </tr>
 
                     <tr>
-                        <td>@Html.LabelFor(model => model.Password)</td>
+                        <td class="fa fa-key" >@Html.LabelFor(model => model.Password)</td>
                         <td>@Html.EditorFor(model => model.Password)</td>
 
                         </tr>
@@ -90,5 +90,10 @@
         <script src="~/Scripts/jquery-3.1.1.min.js"></script>
         <script src="~/Scripts/jquery.validate.min.js"></script>
         <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <link href="~/Content/back.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </body>
 </html>
