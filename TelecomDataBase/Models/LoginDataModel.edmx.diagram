@@ -6,6 +6,12 @@
     <edmx:Diagrams>
       <Diagram DiagramId="454fb6b86bfe494c8edb8ef49e0c26f2" Name="Diagram1">
         <EntityTypeShape EntityType="AdminLoginModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdminLoginModel.Client" Width="1.5" PointX="3.375" PointY="1" />
+        <EntityTypeShape EntityType="AdminLoginModel.Comanda" Width="1.5" PointX="5.625" PointY="1.125" />
+        <EntityTypeShape EntityType="AdminLoginModel.Produ" Width="1.5" PointX="3.375" PointY="5.5" />
+        <AssociationConnector Association="AdminLoginModel.FK_Comanda_Client" />
+        <AssociationConnector Association="AdminLoginModel.FK_Comanda_Comanda" />
+        <AssociationConnector Association="AdminLoginModel.FK_Comanda_Produs" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

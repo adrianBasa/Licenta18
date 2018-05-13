@@ -4,7 +4,39 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AdminLoginModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AdminLoginModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nume" Type="varchar" MaxLength="50" />
+          <Property Name="Prenume" Type="varchar" MaxLength="50" />
+          <Property Name="CNP/CIF" Type="varchar" MaxLength="50" />
+          <Property Name="Judet" Type="varchar" MaxLength="50" />
+          <Property Name="Oras" Type="varchar" MaxLength="50" />
+          <Property Name="Adresa" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Telefon" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Comanda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdProdus" Type="int" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="Cantitate" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nume Produs" Type="varchar" MaxLength="50" />
+          <Property Name="Pret" Type="int" />
+          <Property Name="Descriere Produc" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
@@ -13,11 +45,61 @@
           <Property Name="UserName" Type="varchar" MaxLength="50" />
           <Property Name="Password" Type="varchar" MaxLength="100" />
         </EntityType>
+        <Association Name="FK_Comanda_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Comanda" Type="Self.Comanda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comanda">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comanda_Comanda">
+          <End Role="Comanda" Type="Self.Comanda" Multiplicity="1" />
+          <End Role="Comanda1" Type="Self.Comanda" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Comanda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comanda1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comanda_Produs">
+          <End Role="Produs" Type="Self.Produs" Multiplicity="1" />
+          <End Role="Comanda" Type="Self.Comanda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comanda">
+              <PropertyRef Name="IdProdus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="AdminLoginModelStoreContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comanda" EntityType="Self.Comanda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produs" EntityType="Self.Produs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Comanda_Client" Association="Self.FK_Comanda_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Comanda" EntitySet="Comanda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comanda_Comanda" Association="Self.FK_Comanda_Comanda">
+            <End Role="Comanda" EntitySet="Comanda" />
+            <End Role="Comanda1" EntitySet="Comanda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comanda_Produs" Association="Self.FK_Comanda_Produs">
+            <End Role="Produs" EntitySet="Produs" />
+            <End Role="Comanda" EntitySet="Comanda" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AdminLoginModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -31,7 +113,96 @@
         </EntityType>
         <EntityContainer Name="AdminLoginEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Clients" EntityType="AdminLoginModel.Client" />
+          <EntitySet Name="Comandas" EntityType="AdminLoginModel.Comanda" />
+          <EntitySet Name="Produs" EntityType="AdminLoginModel.Produ" />
+          <AssociationSet Name="FK_Comanda_Client" Association="AdminLoginModel.FK_Comanda_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Comanda" EntitySet="Comandas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comanda_Comanda" Association="AdminLoginModel.FK_Comanda_Comanda">
+            <End Role="Comanda" EntitySet="Comandas" />
+            <End Role="Comanda1" EntitySet="Comandas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comanda_Produs" Association="AdminLoginModel.FK_Comanda_Produs">
+            <End Role="Produ" EntitySet="Produs" />
+            <End Role="Comanda" EntitySet="Comandas" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nume" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prenume" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CNP_CIF" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Judet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Oras" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comandas" Relationship="AdminLoginModel.FK_Comanda_Client" FromRole="Client" ToRole="Comanda" />
+        </EntityType>
+        <EntityType Name="Comanda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdProdus" Type="Int32" Nullable="false" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="Cantitate" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="AdminLoginModel.FK_Comanda_Client" FromRole="Comanda" ToRole="Client" />
+          <NavigationProperty Name="Comanda1" Relationship="AdminLoginModel.FK_Comanda_Comanda" FromRole="Comanda" ToRole="Comanda1" />
+          <NavigationProperty Name="Comanda2" Relationship="AdminLoginModel.FK_Comanda_Comanda" FromRole="Comanda1" ToRole="Comanda" />
+          <NavigationProperty Name="Produ" Relationship="AdminLoginModel.FK_Comanda_Produs" FromRole="Comanda" ToRole="Produ" />
+        </EntityType>
+        <EntityType Name="Produ">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nume_Produs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pret" Type="Int32" />
+          <Property Name="Descriere_Produc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comandas" Relationship="AdminLoginModel.FK_Comanda_Produs" FromRole="Produ" ToRole="Comanda" />
+        </EntityType>
+        <Association Name="FK_Comanda_Client">
+          <End Type="AdminLoginModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="AdminLoginModel.Comanda" Role="Comanda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comanda">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comanda_Comanda">
+          <End Type="AdminLoginModel.Comanda" Role="Comanda" Multiplicity="1" />
+          <End Type="AdminLoginModel.Comanda" Role="Comanda1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Comanda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comanda1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comanda_Produs">
+          <End Type="AdminLoginModel.Produ" Role="Produ" Multiplicity="1" />
+          <End Type="AdminLoginModel.Comanda" Role="Comanda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produ">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comanda">
+              <PropertyRef Name="IdProdus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -44,6 +215,41 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="AdminLoginModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Oras" ColumnName="Oras" />
+                <ScalarProperty Name="Judet" ColumnName="Judet" />
+                <ScalarProperty Name="CNP_CIF" ColumnName="CNP/CIF" />
+                <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comandas">
+            <EntityTypeMapping TypeName="AdminLoginModel.Comanda">
+              <MappingFragment StoreEntitySet="Comanda">
+                <ScalarProperty Name="Cantitate" ColumnName="Cantitate" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdProdus" ColumnName="IdProdus" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produs">
+            <EntityTypeMapping TypeName="AdminLoginModel.Produ">
+              <MappingFragment StoreEntitySet="Produs">
+                <ScalarProperty Name="Descriere_Produc" ColumnName="Descriere Produc" />
+                <ScalarProperty Name="Pret" ColumnName="Pret" />
+                <ScalarProperty Name="Nume_Produs" ColumnName="Nume Produs" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

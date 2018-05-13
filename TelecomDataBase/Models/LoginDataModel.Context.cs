@@ -26,5 +26,8 @@ namespace TelecomDataBase.Models
         }
     
         public DbSet<User> Users { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Comanda> Comandas { get; set; }
+        public DbSet<Produ> Produs { get; set; }
     }
 }

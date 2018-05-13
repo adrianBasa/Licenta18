@@ -12,7 +12,7 @@ namespace TelecomDataBase.Controllers
 {
     public class ComandasController : Controller
     {
-        private AdminLoginEntities8 db = new AdminLoginEntities8();
+        private LoginDa db = new AdminLoginEntities8();
 
         // GET: Comandas
         public ActionResult Index()

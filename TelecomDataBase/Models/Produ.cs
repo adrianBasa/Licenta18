@@ -11,22 +11,19 @@ namespace TelecomDataBase.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Produ
     {
+        public Produ()
+        {
+            this.Comandas = new HashSet<Comanda>();
+        }
+    
         public int ID { get; set; }
-        [System.ComponentModel.DisplayName("Nume Produs")]
-        [Required(ErrorMessage = "Campul Nume Produs  este obligatoriu.")]
-
         public string Nume_Produs { get; set; }
-        [Required(ErrorMessage = "Campul Pret este obligatoriu.")]
-        [RegularExpression(@"[0-9]*\.?[0-9]+", ErrorMessage = "Pretul trebuie sa contina doar cifre")]
-        // [Range(typeof(Decimal), "1", "15", ErrorMessage = "pretul trebuie sa fie o cifra intre {1} si {2}.")]
-        public int? Pret { get; set; }
-        [System.ComponentModel.DisplayName("Descriere Produs")]
-        [Required(ErrorMessage = "Campul Descriere Produs este obligatoriu.")]
-
+        public Nullable<int> Pret { get; set; }
         public string Descriere_Produc { get; set; }
+    
+        public virtual ICollection<Comanda> Comandas { get; set; }
     }
 }

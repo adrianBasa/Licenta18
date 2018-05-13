@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TelecomDataBase.Models;
+using TelecomDataBase.Models.ViewModel;
 
 namespace TelecomDataBase.Controllers
 {
@@ -14,9 +15,9 @@ namespace TelecomDataBase.Controllers
         // GET: Produs
         public ActionResult Index()
         {
-             using (AdminLoginEntities4  dbprodus = new AdminLoginEntities4 ())
+             using (AdminLoginEntities dbModel = new AdminLoginEntities())
                 {
-                return View(dbprodus.Produs.ToList());
+                return View(dbModel.Produs.ToList());
             }
            
         }
@@ -24,9 +25,9 @@ namespace TelecomDataBase.Controllers
         // GET: Produs/Details/5
         public ActionResult Details(int id)
         {
-            using (AdminLoginEntities4 dbprodus = new AdminLoginEntities4())
+            using (AdminLoginEntities dbModel = new AdminLoginEntities())
             {
-                return View(dbprodus.Produs.Where(x=>x.ID==id).FirstOrDefault());
+                return View(dbModel.Produs.Where(x=>x.ID==id).FirstOrDefault());
             }
                 
         }
@@ -39,14 +40,14 @@ namespace TelecomDataBase.Controllers
 
         // POST: Produs/Create
         [HttpPost]
-        public ActionResult Create(Produ produs)
+        public ActionResult Create(ProdusViewModel produs)
         {
             try
             {
-                using (AdminLoginEntities4 dbprodus = new AdminLoginEntities4())
+                using (AdminLoginEntities dbModel = new AdminLoginEntities())
                 {
-                    dbprodus.Produs.Add(produs);
-                    dbprodus.SaveChanges();
+                    dbModel.Produs.Add(ConvertProdusViewModeltoProdu(produs));
+                    dbModel.SaveChanges();
                 }
 
                     // TODO: Add insert logic here
@@ -59,12 +60,24 @@ namespace TelecomDataBase.Controllers
             }
         }
 
+        private Produ ConvertProdusViewModeltoProdu(ProdusViewModel produsViewModel)
+        {
+            return new Produ
+            {
+                Descriere_Produc = produsViewModel.Descriere_Produc,
+                Nume_Produs = produsViewModel.Nume_Produs,
+                Pret = produsViewModel.Pret           
+            };
+           
+        }
+
+     
         // GET: Produs/Edit/5
         public ActionResult Edit(int id)
         {
-            using (AdminLoginEntities4 dbprodus = new AdminLoginEntities4())
+            using (AdminLoginEntities dbModel = new AdminLoginEntities())
             {
-                return View(dbprodus.Produs.Where(x => x.ID == id).FirstOrDefault());
+                return View(dbModel.Produs.Where(x => x.ID == id).FirstOrDefault());
             }
         }
 
@@ -73,10 +86,11 @@ namespace TelecomDataBase.Controllers
         public ActionResult Edit(int id, Produ produs)
         {
             try
-            { using (AdminLoginEntities4 dbprodus = new AdminLoginEntities4())
+            {
+                using (AdminLoginEntities dbModel = new AdminLoginEntities())
                 {
-                    dbprodus.Entry(produs).State = EntityState.Modified;
-                    dbprodus.SaveChanges();
+                    dbModel.Entry(produs).State = EntityState.Modified;
+                    dbModel.SaveChanges();
                 }
                     // TODO: Add update logic here
 
@@ -91,9 +105,9 @@ namespace TelecomDataBase.Controllers
         // GET: Produs/Delete/5
         public ActionResult Delete(int id)
         {
-            using (AdminLoginEntities4 dbprodus = new AdminLoginEntities4())
+            using (AdminLoginEntities dbModel = new AdminLoginEntities())
             {
-                return View(dbprodus.Produs.Where(x => x.ID == id).FirstOrDefault());
+                return View(dbModel.Produs.Where(x => x.ID == id).FirstOrDefault());
             }
         }
 
@@ -104,10 +118,10 @@ namespace TelecomDataBase.Controllers
             try
             {
                 // TODO: Add delete logic here
-                using (AdminLoginEntities4 dbprodus = new AdminLoginEntities4()) {
-                    Produ produs = dbprodus.Produs.Where(x => x.ID == id).FirstOrDefault();
-                    dbprodus.Produs.Remove(produs);
-                    dbprodus.SaveChanges();
+                using (AdminLoginEntities dbModel = new AdminLoginEntities()) {
+                    Produ produs = dbModel.Produs.Where(x => x.ID == id).FirstOrDefault();
+                    dbModel.Produs.Remove(produs);
+                    dbModel.SaveChanges();
 
                 }
 

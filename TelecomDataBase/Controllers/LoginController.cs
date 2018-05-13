@@ -15,7 +15,7 @@ namespace TelecomDataBase.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Autherize(TelecomDataBase.Models.User userModel)
+        public ActionResult Autherize(TelecomDataBase.Models.ViewModel.UserViewModel userModel)
         {
             using (AdminLoginEntities db = new AdminLoginEntities())
             {

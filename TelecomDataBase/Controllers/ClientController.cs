@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TelecomDataBase.Models;
+using TelecomDataBase.Models.ViewModel;
 
 namespace TelecomDataBase.Controllers
 {
@@ -13,7 +14,7 @@ namespace TelecomDataBase.Controllers
         // GET: Client
         public ActionResult Index()
         {
-            using (DbModels dbModel = new DbModels())
+            using (AdminLoginEntities dbModel = new AdminLoginEntities())
             {
                 return View(dbModel.Clients.ToList());
             }
@@ -23,7 +24,7 @@ namespace TelecomDataBase.Controllers
         // GET: Client/Details/5
         public ActionResult Details(int id)
         {
-            using (DbModels dbModel = new DbModels())
+            using (AdminLoginEntities dbModel = new AdminLoginEntities())
             {
                 return View(dbModel.Clients.Where(x=>x.Id==id).FirstOrDefault());
 
@@ -40,12 +41,12 @@ namespace TelecomDataBase.Controllers
 
         // POST: Client/Create
         [HttpPost]
-        public ActionResult Create(Client client)
+        public ActionResult Create(ClientViewModel client)
         {
             try
-            {  using (DbModels dbModel = new DbModels()) {
+            {  using (AdminLoginEntities dbModel = new AdminLoginEntities()) {
 
-                    dbModel.Clients.Add(client);
+                    dbModel.Clients.Add(ConvertClientViewModelToClient(client));
                     dbModel.SaveChanges();
                 }
                     // TODO: Add insert logic here
@@ -58,10 +59,26 @@ namespace TelecomDataBase.Controllers
             }
         }
 
+        private Client ConvertClientViewModelToClient(ClientViewModel clientViewModel)
+        {
+            return new Client
+            {
+                Adresa = clientViewModel.Adresa,
+                CNP_CIF = clientViewModel.CNP_CIF,
+               Email = clientViewModel.Email,
+               Comandas = new HashSet<Comanda>(),
+               Judet = clientViewModel.Judet,
+               Nume = clientViewModel.Nume,
+               Oras = clientViewModel.Oras,
+               Prenume = clientViewModel.Prenume,
+               Telefon = clientViewModel.Telefon
+            };
+        }
+
         // GET: Client/Edit/5
         public ActionResult Edit(int id)
         {
-            using (DbModels dbModel = new DbModels())
+            using (AdminLoginEntities dbModel = new AdminLoginEntities())
             {
                 return View(dbModel.Clients.Where(x => x.Id == id).FirstOrDefault());
 
@@ -77,7 +94,7 @@ namespace TelecomDataBase.Controllers
             try
             {
 
-                using (DbModels dbModel = new DbModels())
+                using (AdminLoginEntities dbModel = new AdminLoginEntities())
                 {
                     dbModel.Entry(client).State = EntityState.Modified;
                     dbModel.SaveChanges();
@@ -95,7 +112,7 @@ namespace TelecomDataBase.Controllers
         // GET: Client/Delete/5
         public ActionResult Delete(int id)
         {
-            using (DbModels dbModel = new DbModels())
+            using (AdminLoginEntities dbModel = new AdminLoginEntities())
             {
                 return View(dbModel.Clients.Where(x => x.Id == id).FirstOrDefault());
 
@@ -109,7 +126,7 @@ namespace TelecomDataBase.Controllers
             try
             {
 
-                using (DbModels dbModel = new DbModels())
+                using (AdminLoginEntities dbModel = new AdminLoginEntities())
                 {
                     Client client = dbModel.Clients.Where(x => x.Id == id).FirstOrDefault();
                     dbModel.Clients.Remove(client);

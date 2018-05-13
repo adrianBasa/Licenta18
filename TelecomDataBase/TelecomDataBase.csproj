@@ -150,36 +150,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\comanda.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>comanda.edmx</DependentUpon>
-      <LastGenOutput>comanda.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\comanda.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>comanda.edmx</DependentUpon>
-      <LastGenOutput>comanda1.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DbModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbModel.edmx</DependentUpon>
-      <LastGenOutput>DbModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DbModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbModel.edmx</DependentUpon>
-      <LastGenOutput>DbModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DBProdus.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBProdus.edmx</DependentUpon>
-      <LastGenOutput>DBProdus.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DBProdus.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBProdus.edmx</DependentUpon>
-      <LastGenOutput>DBProdus.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\LoginDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LoginDataModel.edmx</DependentUpon>
@@ -193,27 +163,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <EntityDeploy Include="Models\DbModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DbModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DbModel.edmx.diagram">
-      <DependentUpon>DbModel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\DBProdus.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBProdus.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DBProdus.edmx.diagram">
-      <DependentUpon>DBProdus.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\comanda.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>comanda.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\comanda.edmx.diagram">
-      <DependentUpon>comanda.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -240,7 +189,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ClientController.cs" />
-    <Compile Include="Controllers\ComandasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProdusController.cs" />
@@ -248,55 +196,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Client.cs">
-      <DependentUpon>DbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\comanda.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>comanda.Context.tt</DependentUpon>
+      <DependentUpon>LoginDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Comanda.cs">
-      <DependentUpon>comanda.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\comanda.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>comanda.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\comanda1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>comanda.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DbModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBProdus.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBProdus.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBProdus.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBProdus.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBProdus.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBProdus.edmx</DependentUpon>
+      <DependentUpon>LoginDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginDataModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -314,11 +217,14 @@
       <DependentUpon>LoginDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Produ.cs">
-      <DependentUpon>DBProdus.tt</DependentUpon>
+      <DependentUpon>LoginDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>LoginDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\Client.cs" />
+    <Compile Include="Models\ViewModel\Produs.cs" />
+    <Compile Include="Models\ViewModel\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
