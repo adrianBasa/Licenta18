@@ -1,0 +1,42 @@
+﻿@model TelecomDataBase.Models.Produ
+
+@{
+    ViewBag.Title = "Detalii";
+}
+
+<h2>Detalii</h2>
+
+<div>
+    <h4>Produs</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nume_Produs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nume_Produs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pret)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pret)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descriere_Produc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descriere_Produc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Inapoi la lista de produse", "Index")
+</p>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AdminLoginModel2StoreContainer" CdmEntityContainer="AdminLoginEntities4">
+    <EntitySetMapping Name="Produs">
+      <EntityTypeMapping TypeName="AdminLoginModel2.Produ">
+        <MappingFragment StoreEntitySet="Produs">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Nume_Produs" ColumnName="Nume Produs" />
+          <ScalarProperty Name="Pret" ColumnName="Pret" />
+          <ScalarProperty Name="Descriere_Produc" ColumnName="Descriere Produc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

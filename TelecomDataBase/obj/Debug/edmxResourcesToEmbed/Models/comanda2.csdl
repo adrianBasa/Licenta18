@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AdminLoginModel4" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nume" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Prenume" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CNP_CIF" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Rezident" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Judet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Oras" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Telefon" Type="Int32" />
+    <NavigationProperty Name="Comandas" Relationship="Self.FK_Comanda_Client" FromRole="Client" ToRole="Comanda" />
+  </EntityType>
+  <EntityType Name="Produ">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nume_Produs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Pret" Type="Int32" />
+    <Property Name="Descriere_Produc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Comandas" Relationship="Self.FK_Comanda_Produs" FromRole="Produs" ToRole="Comanda" />
+  </EntityType>
+  <EntityType Name="Comanda">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="IdProdus" />
+      <PropertyRef Name="IdClient" />
+      <PropertyRef Name="Cantitate" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="IdProdus" Type="Int32" Nullable="false" />
+    <Property Name="IdClient" Type="Int32" Nullable="false" />
+    <Property Name="Cantitate" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Comanda_Client" FromRole="Comanda" ToRole="Client" />
+    <NavigationProperty Name="Produ" Relationship="Self.FK_Comanda_Produs" FromRole="Comanda" ToRole="Produs" />
+  </EntityType>
+  <Association Name="FK_Comanda_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Comanda" Type="Self.Comanda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comanda">
+        <PropertyRef Name="IdClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comanda_Produs">
+    <End Role="Produs" Type="Self.Produ" Multiplicity="1" />
+    <End Role="Comanda" Type="Self.Comanda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produs">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comanda">
+        <PropertyRef Name="IdProdus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AdminLoginEntities7" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clients" EntityType="Self.Client" />
+    <EntitySet Name="Produs" EntityType="Self.Produ" />
+    <EntitySet Name="Comandas" EntityType="Self.Comanda" />
+    <AssociationSet Name="FK_Comanda_Client" Association="Self.FK_Comanda_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Comanda" EntitySet="Comandas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comanda_Produs" Association="Self.FK_Comanda_Produs">
+      <End Role="Produs" EntitySet="Produs" />
+      <End Role="Comanda" EntitySet="Comandas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

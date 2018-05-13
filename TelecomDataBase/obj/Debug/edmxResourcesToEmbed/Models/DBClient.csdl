@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AdminLoginModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ClientDB">
+    <Key>
+      <PropertyRef Name="ClientID" />
+    </Key>
+    <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nume" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Prenume" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CNP_CIF" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Rezident" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Judet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Oras" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Telefon" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="DBClient" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ClientDBs" EntityType="Self.ClientDB" />
+  </EntityContainer>
+</Schema>

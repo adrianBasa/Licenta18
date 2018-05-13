@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+    if (Session["userID"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    
+
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="nav navbar-nav navbar-right">
+          <li>  <span class="glyphicon glyphicon-user"></span>  @Session["userName"].ToString() </li>
+          <li>   <a href="@Url.Action("LogOut","Login")"><span class="glyphicon glyphicon-log-in">LogOut </span> </a></li>
+         
+</div>
+            </nav>
+    </div>
+    <div class="container body-content">
+        
+        <h1> Dashboard </h1>
+
+        <input class="btn btn-default" type="button" value="Creare Client" onclick="@("window.location.href='" + @Url.Action("Create", "Client") + "'");" />
+        <input class="btn btn-default" type="button" value="Vizualizare Client" onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");" />
+        <input class="btn btn-default" type="button" value="Vizualizare Produs" onclick="@("window.location.href='" + @Url.Action("Index", "Produs") + "'");" />
+        <input class="btn btn-default" type="button" value="creare Produs" onclick="@("window.location.href='" + @Url.Action("Create", "Produs") + "'");" />
+
+        </div>
+  
+           
+</body>
+</html>

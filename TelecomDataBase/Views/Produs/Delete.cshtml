@@ -1,0 +1,48 @@
+﻿@model TelecomDataBase.Models.Produ
+
+@{
+    ViewBag.Title = "Stergere";
+}
+
+<h2>Stergere</h2>
+
+<h3>Esti sigur ca vrei sa stergi produsul</h3>
+<div>
+    <h4>Produ</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nume_Produs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nume_Produs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pret)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pret)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descriere_Produc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descriere_Produc)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Inapoi la lista de produse", "Index")
+        </div>
+    }
+</div>

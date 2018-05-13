@@ -1,0 +1,83 @@
+﻿@model TelecomDataBase.Models.Client
+
+@{
+    ViewBag.Title = "Detalii";
+}
+
+<h2>Detalii</h2>
+
+<div>
+    <h4>Client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nume)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nume)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prenume)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prenume)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CNP_CIF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CNP_CIF)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Judet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Judet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Oras)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Oras)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefon)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Inapoi la lista de clienti", "Index")
+</p>
