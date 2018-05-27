@@ -28,6 +28,7 @@ namespace TelecomDataBase.Controllers
                 else {
                     Session["userID"] = userDetails.UserId;
                     Session["UserName"] = userDetails.UserName;
+                    Session["IsAdmin"] = userDetails.IsAdmin;
                     return RedirectToAction("Index", "Home");
                 }
            }

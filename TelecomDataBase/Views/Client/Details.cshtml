@@ -77,7 +77,11 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+<p> 
     @Html.ActionLink("Inapoi la lista de clienti", "Index")
+@if (Session["IsAdmin"] != null && Convert.ToBoolean(Session["IsAdmin"].ToString()) == true)
+{
+    <span>|</span>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id });
+}
 </p>

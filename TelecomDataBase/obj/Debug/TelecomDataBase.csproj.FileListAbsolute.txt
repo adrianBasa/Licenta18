@@ -169,4 +169,3 @@ C:\Users\Adrian\Documents\Licenta\Licenta18\TelecomDataBase\bin\System.Web.Helpe
 C:\Users\Adrian\Documents\Licenta\Licenta18\TelecomDataBase\bin\System.Web.Mvc.xml
 C:\Users\Adrian\Documents\Licenta\Licenta18\TelecomDataBase\obj\Debug\TelecomDataBase.dll
 C:\Users\Adrian\Documents\Licenta\Licenta18\TelecomDataBase\obj\Debug\TelecomDataBase.pdb
-C:\Users\Adrian\Documents\Licenta\Licenta18\TelecomDataBase\obj\Debug\TelecomDataBase.csprojResolveAssemblyReference.cache

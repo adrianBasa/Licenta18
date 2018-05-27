@@ -35,9 +35,15 @@
             @Html.DisplayFor(modelItem => item.Descriere_Produc)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) 
+
+@if (Session["IsAdmin"] != null && Convert.ToBoolean(Session["IsAdmin"].ToString()) == true)
+{
+    <span>|</span>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+            <span>|</span>
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+}
         </td>
     </tr>
 }

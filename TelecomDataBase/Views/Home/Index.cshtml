@@ -33,12 +33,18 @@
     <div class="container body-content">
         
         <h1> Dashboard </h1>
-
+        @if (Convert.ToBoolean(Session["IsAdmin"].ToString()) == true)
+            {
+        
         <input class="btn btn-default" type="button" value="Creare Client" onclick="@("window.location.href='" + @Url.Action("Create", "Client") + "'");" />
         <input class="btn btn-default" type="button" value="Vizualizare Client" onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");" />
         <input class="btn btn-default" type="button" value="Vizualizare Produs" onclick="@("window.location.href='" + @Url.Action("Index", "Produs") + "'");" />
         <input class="btn btn-default" type="button" value="creare Produs" onclick="@("window.location.href='" + @Url.Action("Create", "Produs") + "'");" />
-
+            }
+        else {
+        <input class="btn btn-default" type="button" value="Vizualizare Client" onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");" />
+        <input class="btn btn-default" type="button" value="Vizualizare Produs" onclick="@("window.location.href='" + @Url.Action("Index", "Produs") + "'");" />
+        }
         </div>
   
            
