@@ -1,0 +1,66 @@
+﻿@model TelecomDataBase.Models.ViewModel.UserViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="mdl-color--white mdl-shadow--4dp mdl-color-text--grey-800 mdl-cell mdl-cell--10-col">
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+        <h4>User</h4>
+        <hr />
+        <label class="field-validation-error">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
+        <div class="mdl-grid">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "mdl-textfield__label" })
+                 @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "mdl-textfield__input" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @style="visibility:visible", @class = "mdl-textfield__error" })
+            </div>
+		</div>
+
+        <div class="mdl-grid">
+			<div class="mdl-cell  mdl-cell--10-col">
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="IsAdmin">
+					@Html.CheckBoxFor(model => model.IsAdmin, new { @class = "mdl-checkbox__input" })
+					<span class="mdl-checkbox__label">IsAdmin?</span>
+				</label>
+                @Html.ValidationMessageFor(model => model.IsAdmin, "", new { @style="visibility:visible", @class = "mdl-textfield__error" })
+            </div>
+		</div>
+        
+        <div class="mdl-grid">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "mdl-textfield__label" })
+                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "mdl-textfield__input" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @style="visibility:visible", @class = "mdl-textfield__error" })
+            </div>
+		</div>
+        <div class="mdl-grid">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "mdl-textfield__label" })
+                 @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "mdl-textfield__input" } })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @style = "visibility:visible", @class = "mdl-textfield__error" })
+            </div>
+        </div>
+
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--2-offset mdl-cell--10-col">
+				<input type="button" value="Cancel" onclick="location.href = '/';" class="mdl-button mdl-js-button mdl-button--raised"/>
+                <input type="submit" value="Create" class="mdl-button mdl-js-button mdl-button--raised" />
+            </div>
+        </div>
+}
+
+</div>
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

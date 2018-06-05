@@ -66,7 +66,7 @@ namespace TelecomDataBase.Controllers
             {
                 Descriere_Produc = produsViewModel.Descriere_Produc,
                 Nume_Produs = produsViewModel.Nume_Produs,
-                Pret = produsViewModel.Pret           
+                Pret = produsViewModel.Pret ?? 0           
             };
            
         }

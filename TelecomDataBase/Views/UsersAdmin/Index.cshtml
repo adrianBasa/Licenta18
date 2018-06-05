@@ -1,0 +1,56 @@
+﻿﻿@model IEnumerable<TelecomDataBase.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<main class="mdl-layout__content">
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
+	<thead>
+		<tr>
+			<th>
+			    @Html.DisplayNameFor(model => model.UserName)
+			</th>
+			<th>
+			    @Html.DisplayNameFor(model => model.IsAdmin)
+			</th>
+		
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+@foreach (var item in Model) {
+		<tr>
+			<td>
+			    @Html.DisplayFor(modelItem => item.UserName)
+			</td>
+			<td>
+			    @Html.DisplayFor(modelItem => item.IsAdmin)
+			</td>
+			
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.UserId })
+                @if (Session["IsAdmin"] != null && Convert.ToBoolean(Session["IsAdmin"].ToString()) == true)
+                {
+                    <span>|</span>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId });
+                    <span>|</span>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.UserId });
+                }
+
+            </td>
+		</tr>
+}
+	</tbody>
+</table>
+</div>
+</div>
+</main>
+

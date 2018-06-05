@@ -16,37 +16,75 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
-    <link href="~/Content/back.css" rel="stylesheet" />
+ 
     
 
 </head>
 <body>
     <div>
         <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="nav navbar-nav navbar-right">
-          <li>  <span class="glyphicon glyphicon-user"></span>  @Session["userName"].ToString() </li>
-          <li>   <a href="@Url.Action("LogOut","Login")"><span class="glyphicon glyphicon-log-in">LogOut </span> </a></li>
-         
-</div>
-            </nav>
+            <div class="nav navbar-nav navbar-right">
+                <a>  <span class="glyphicon glyphicon-user"></span>  @Session["userName"].ToString() </a>
+                <a href="@Url.Action("LogOut","Login")"><span class="glyphicon glyphicon-log-in">LogOut </span> </a>
+
+            </div>
+        </nav>
+
     </div>
-    <div class="container body-content">
-        
-        <h1> Dashboard </h1>
-        @if (Convert.ToBoolean(Session["IsAdmin"].ToString()) == true)
+
+    <div class="row">
+        <div class="col-sm-3 col-md-6 col-lg-4">
+            <div class="btn-group-vertical">
+
+
+                <h1> Dashboard </h1>
+                @if (Convert.ToBoolean(Session["IsAdmin"].ToString()) == true)
             {
-        
-        <input class="btn btn-default" type="button" value="Creare Client" onclick="@("window.location.href='" + @Url.Action("Create", "Client") + "'");" />
-        <input class="btn btn-default" type="button" value="Vizualizare Client" onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");" />
-        <input class="btn btn-default" type="button" value="Vizualizare Produs" onclick="@("window.location.href='" + @Url.Action("Index", "Produs") + "'");" />
-        <input class="btn btn-default" type="button" value="creare Produs" onclick="@("window.location.href='" + @Url.Action("Create", "Produs") + "'");" />
-            }
-        else {
-        <input class="btn btn-default" type="button" value="Vizualizare Client" onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");" />
-        <input class="btn btn-default" type="button" value="Vizualizare Produs" onclick="@("window.location.href='" + @Url.Action("Index", "Produs") + "'");" />
-        }
+
+                    <input class="btn btn-primary" type="button" value="Creare Client" onclick="@("window.location.href='" + @Url.Action("Create", "Client") + "'");" />
+                    <input class="btn btn-primary" type="button" value="Creare Produs" onclick="@("window.location.href='" + @Url.Action("Create", "Produs") + "'");" />
+                    <input class="btn btn-primary" type="button" value="Creare Comanda" onclick="@("window.location.href='" + @Url.Action("Create", "Comanda") + "'");" />
+                    <input class="btn btn-primary" type="button" value="Creare Comanda" onclick="@("window.location.href='" + @Url.Action("Create", "UsersAdmin") + "'");" />
+                    <input class="btn btn-primary" type="button" value="Vizualizare Produs" onclick="@("window.location.href='" + @Url.Action("Index", "Comanda") + "'");" />
+                    <input class="btn btn-primary" type="button" value="Vizualizare User" onclick="@("window.location.href='" + @Url.Action("Index", "UsersAdmin") + "'");" />
+                    <input class="btn btn-primary" type="button" value="Vizualizare Client" onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");" />
+                    <input class="btn btn-primary" type="button" value="Vizualizare Produs" onclick="@("window.location.href='" + @Url.Action("Index", "Produs") + "'");" />
+                }
+                else
+                {
+                    <input class="btn btn-default" type="button" value="Vizualizare Client" onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");" />
+                    <input class="btn btn-default" type="button" value="Vizualizare Produs" onclick="@("window.location.href='" + @Url.Action("Index", "Produs") + "'");" />
+                    <input class="btn btn-default" type="button" value="Vizualizare Produs" onclick="@("window.location.href='" + @Url.Action("Index", "Comanda") + "'");" />
+                }
+
+            </div>
         </div>
-  
-           
+        <div class="col-sm-9 col-md-6 col-lg-8" style="background-color:grey; margin-top: 100px; padding-right: 100px">
+            <h1 align="center"> Lucrare de licenta </h1>
+            <p align="right">
+                Milioane de companii folosesc Internetul ca un canal de comunicare eficient din punct de vedere al costurilor. Le permite companiilor  să facă schimb de informații cu piața țintă și să facă tranzacții rapide și sigure. Cu toate acestea, implicarea efectivă este posibilă numai atunci când întreprinderea este capabilă să capteze și să stocheze toate datele necesare și să aibă un mijloc de prelucrare a acestor informații și de prezentare a rezultatelor utilizatorului.
+
+                Această lucrare are ca scop prezentarea pașilor pentru dezvoltarea unei aplicații de tip web, avantajele folosirii și rapiditatea dezvoltării unei aplicații de tip web/
+
+
+            </p>
+        </div>
+
+
+    </div>
+
+
+
+    <div style="height:300px">
+        </div>
+
+            <div class="container body-content">
+
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Evidenta Clienti</p>
+                </footer>
+            </div>
 </body>
+
 </html>

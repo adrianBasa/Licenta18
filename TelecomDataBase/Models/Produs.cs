@@ -12,16 +12,16 @@ namespace TelecomDataBase.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Produ
+    public partial class Produs
     {
-        public Produ()
+        public Produs()
         {
             this.Comandas = new HashSet<Comanda>();
         }
     
         public int ID { get; set; }
         public string Nume_Produs { get; set; }
-        public int Pret { get; set; }
+        public Nullable<int> Pret { get; set; }
         public string Descriere_Produc { get; set; }
     
         public virtual ICollection<Comanda> Comandas { get; set; }

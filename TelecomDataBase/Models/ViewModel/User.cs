@@ -17,6 +17,13 @@ namespace TelecomDataBase.Models.ViewModel
         [Required(ErrorMessage = "This  field is required.")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "This  field is required.")]
+        [Compare("Password", ErrorMessage = "Parola nu , Type again !")]
+
+        public string ConfirmPassword { get; set; }
+
+        public bool IsAdmin { get; set; }
+
         public string LoginErrorMessage { get; set; }
     }
 }

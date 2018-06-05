@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="AdminLoginModel.Comanda" Width="1.5" PointX="5.625" PointY="1.125" />
         <EntityTypeShape EntityType="AdminLoginModel.Produ" Width="1.5" PointX="3.375" PointY="5.5" />
         <AssociationConnector Association="AdminLoginModel.FK_Comanda_Client" />
-        <AssociationConnector Association="AdminLoginModel.FK_Comanda_Comanda" />
         <AssociationConnector Association="AdminLoginModel.FK_Comanda_Produs" />
       </Diagram>
     </edmx:Diagrams>

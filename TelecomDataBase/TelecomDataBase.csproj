@@ -189,9 +189,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\ComandaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProdusController.cs" />
+    <Compile Include="Controllers\UsersAdminController.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -255,11 +258,16 @@
     <Content Include="Views\Produs\Details.cshtml" />
     <Content Include="Views\Produs\Edit.cshtml" />
     <Content Include="Views\Produs\Delete.cshtml" />
-    <Content Include="Views\Comandas\Create.cshtml" />
-    <Content Include="Views\Comandas\Delete.cshtml" />
-    <Content Include="Views\Comandas\Details.cshtml" />
-    <Content Include="Views\Comandas\Edit.cshtml" />
-    <Content Include="Views\Comandas\Index.cshtml" />
+    <Content Include="Views\Comanda\Create.cshtml" />
+    <Content Include="Views\Comanda\Delete.cshtml" />
+    <Content Include="Views\Comanda\Details.cshtml" />
+    <Content Include="Views\Comanda\Edit.cshtml" />
+    <Content Include="Views\Comanda\Index.cshtml" />
+    <Content Include="Views\UsersAdmin\Create.cshtml" />
+    <Content Include="Views\UsersAdmin\Delete.cshtml" />
+    <Content Include="Views\UsersAdmin\Details.cshtml" />
+    <Content Include="Views\UsersAdmin\Edit.cshtml" />
+    <Content Include="Views\UsersAdmin\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

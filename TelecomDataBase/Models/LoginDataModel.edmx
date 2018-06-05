@@ -23,7 +23,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdProdus" Type="int" Nullable="false" />
           <Property Name="IdClient" Type="int" Nullable="false" />
           <Property Name="Cantitate" Type="int" Nullable="false" />
@@ -34,7 +34,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nume Produs" Type="varchar" MaxLength="50" />
-          <Property Name="Pret" Type="int" />
+          <Property Name="Pret" Type="money" Nullable="false" />
           <Property Name="Descriere Produc" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="User">
@@ -43,8 +43,9 @@
           </Key>
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="100" />
           <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="Salt" Type="varbinary(max)" />
+          <Property Name="Password" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Comanda_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
@@ -55,18 +56,6 @@
             </Principal>
             <Dependent Role="Comanda">
               <PropertyRef Name="IdClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comanda_Comanda">
-          <End Role="Comanda" Type="Self.Comanda" Multiplicity="1" />
-          <End Role="Comanda1" Type="Self.Comanda" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Comanda">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Comanda1">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -91,10 +80,6 @@
             <End Role="Client" EntitySet="Client" />
             <End Role="Comanda" EntitySet="Comanda" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comanda_Comanda" Association="Self.FK_Comanda_Comanda">
-            <End Role="Comanda" EntitySet="Comanda" />
-            <End Role="Comanda1" EntitySet="Comanda" />
-          </AssociationSet>
           <AssociationSet Name="FK_Comanda_Produs" Association="Self.FK_Comanda_Produs">
             <End Role="Produs" EntitySet="Produs" />
             <End Role="Comanda" EntitySet="Comanda" />
@@ -110,8 +95,9 @@
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="Salt" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Password" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityContainer Name="AdminLoginEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
@@ -121,10 +107,6 @@
           <AssociationSet Name="FK_Comanda_Client" Association="AdminLoginModel.FK_Comanda_Client">
             <End Role="Client" EntitySet="Clients" />
             <End Role="Comanda" EntitySet="Comandas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comanda_Comanda" Association="AdminLoginModel.FK_Comanda_Comanda">
-            <End Role="Comanda" EntitySet="Comandas" />
-            <End Role="Comanda1" EntitySet="Comandas" />
           </AssociationSet>
           <AssociationSet Name="FK_Comanda_Produs" Association="AdminLoginModel.FK_Comanda_Produs">
             <End Role="Produ" EntitySet="Produs" />
@@ -155,8 +137,6 @@
           <Property Name="IdClient" Type="Int32" Nullable="false" />
           <Property Name="Cantitate" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="AdminLoginModel.FK_Comanda_Client" FromRole="Comanda" ToRole="Client" />
-          <NavigationProperty Name="Comanda1" Relationship="AdminLoginModel.FK_Comanda_Comanda" FromRole="Comanda" ToRole="Comanda1" />
-          <NavigationProperty Name="Comanda2" Relationship="AdminLoginModel.FK_Comanda_Comanda" FromRole="Comanda1" ToRole="Comanda" />
           <NavigationProperty Name="Produ" Relationship="AdminLoginModel.FK_Comanda_Produs" FromRole="Comanda" ToRole="Produ" />
         </EntityType>
         <EntityType Name="Produ">
@@ -165,7 +145,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nume_Produs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Pret" Type="Int32" />
+          <Property Name="Pret" Type="Int32" Nullable="false" />
           <Property Name="Descriere_Produc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Comandas" Relationship="AdminLoginModel.FK_Comanda_Produs" FromRole="Produ" ToRole="Comanda" />
         </EntityType>
@@ -178,18 +158,6 @@
             </Principal>
             <Dependent Role="Comanda">
               <PropertyRef Name="IdClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comanda_Comanda">
-          <End Type="AdminLoginModel.Comanda" Role="Comanda" Multiplicity="1" />
-          <End Type="AdminLoginModel.Comanda" Role="Comanda1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Comanda">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Comanda1">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -214,10 +182,11 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AdminLoginModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
                 <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

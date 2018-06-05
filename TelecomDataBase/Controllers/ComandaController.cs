@@ -10,18 +10,18 @@ using TelecomDataBase.Models;
 
 namespace TelecomDataBase.Controllers
 {
-    public class ComandasController : Controller
+    public class ComandaController : Controller
     {
-        private LoginDa db = new AdminLoginEntities8();
+        private AdminLoginEntities db = new AdminLoginEntities();
 
-        // GET: Comandas
+        // GET: Comanda
         public ActionResult Index()
         {
             var comandas = db.Comandas.Include(c => c.Client).Include(c => c.Produ);
             return View(comandas.ToList());
         }
 
-        // GET: Comandas/Details/5
+        // GET: Comanda/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,7 +36,7 @@ namespace TelecomDataBase.Controllers
             return View(comanda);
         }
 
-        // GET: Comandas/Create
+        // GET: Comanda/Create
         public ActionResult Create()
         {
             ViewBag.IdClient = new SelectList(db.Clients, "Id", "Nume");
@@ -44,7 +44,7 @@ namespace TelecomDataBase.Controllers
             return View();
         }
 
-        // POST: Comandas/Create
+        // POST: Comanda/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -63,7 +63,7 @@ namespace TelecomDataBase.Controllers
             return View(comanda);
         }
 
-        // GET: Comandas/Edit/5
+        // GET: Comanda/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -80,7 +80,7 @@ namespace TelecomDataBase.Controllers
             return View(comanda);
         }
 
-        // POST: Comandas/Edit/5
+        // POST: Comanda/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -98,7 +98,7 @@ namespace TelecomDataBase.Controllers
             return View(comanda);
         }
 
-        // GET: Comandas/Delete/5
+        // GET: Comanda/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,7 +113,7 @@ namespace TelecomDataBase.Controllers
             return View(comanda);
         }
 
-        // POST: Comandas/Delete/5
+        // POST: Comanda/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

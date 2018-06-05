@@ -1,0 +1,58 @@
+﻿@model TelecomDataBase.Models.Comanda
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="mdl-color--white mdl-shadow--4dp mdl-color-text--grey-800 mdl-cell mdl-cell--10-col">
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+        <h4>Comanda</h4>
+        <hr />
+		
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="mdl-grid">
+			<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label mdl-cell  mdl-cell--12-col">
+                @Html.DropDownList("IdProdus", null, htmlAttributes: new { @class = "mdl-selectfield__select" })
+				@Html.Label("IdProdus", "Selecteaza produsul:", htmlAttributes: new { @class = "mdl-selectfield__label " })
+                @Html.ValidationMessageFor(model => model.IdProdus, "", new { @style="visibility:visible", @class = "mdl-textfield__error" })
+            </div>
+		</div>
+
+        <div class="mdl-grid">
+			<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label mdl-cell  mdl-cell--12-col">
+                @Html.DropDownList("IdClient", null, htmlAttributes: new { @class = "mdl-selectfield__select" })
+				@Html.Label("IdClient", "Selecteaza numele clientului:", htmlAttributes: new { @class = "mdl-selectfield__label " })
+                @Html.ValidationMessageFor(model => model.IdClient, "", new { @style="visibility:visible", @class = "mdl-textfield__error" })
+            </div>
+		</div>
+
+        <div class="mdl-grid">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+					@Html.EditorFor(model => model.Cantitate, new { htmlAttributes = new { @class = "mdl-textfield__input" } })
+							@Html.LabelFor(model => model.Cantitate, htmlAttributes: new { @class = "mdl-textfield__label" })
+                @Html.ValidationMessageFor(model => model.Cantitate, "", new { @style="visibility:visible", @class = "mdl-textfield__error" })
+            </div>
+		</div>
+
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--2-offset mdl-cell--10-col">
+				<input type="button" value="Cancel" onclick="location.href = '/';" class="mdl-button mdl-js-button mdl-button--raised"/>
+                <input type="submit" value="Save" class="mdl-button mdl-js-button mdl-button--raised" />
+            </div>
+        </div>
+}
+</div>
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,43 @@
+﻿﻿@model TelecomDataBase.Models.User
+
+@{
+    ViewBag.Title = "Detalii";
+}
+
+<div class="mdl-color--white mdl-shadow--4dp mdl-color-text--grey-800 mdl-cell mdl-cell--10-col">
+
+<h2>Detalii</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <table>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsAdmin)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IsAdmin)
+                </dd>
+
+            </dl>
+        <table>
+</div>
+</div>
+<p>
+    @Html.ActionLink("Inapoi la lista de Utilizatori", "Index")
+@if (Session["IsAdmin"] != null && Convert.ToBoolean(Session["IsAdmin"].ToString()) == true)
+{
+    <span>|</span>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserId });
+}
+</p>

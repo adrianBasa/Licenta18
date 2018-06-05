@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using TelecomDataBase.Models;
 
@@ -19,8 +23,17 @@ namespace TelecomDataBase.Controllers
         {
             using (AdminLoginEntities db = new AdminLoginEntities())
             {
-                var userDetails = db.Users.Where(x => x.UserName == userModel.UserName && x.Password == userModel.Password).FirstOrDefault();
-                if (userDetails == null)
+                //byte[] salt = new byte[32];
+                //System.Security.Cryptography.RNGCryptoServiceProvider.Create().GetBytes(salt);
+                
+
+                
+                var userDetails = db.Users.Where(x => x.UserName == userModel.UserName).FirstOrDefault();
+                var hashedPass = Helper.GetHashPass(userModel.Password, (byte[])userDetails.Salt);
+
+                //  var encodedPassword = GetEncodedPassword(userModel.Password);
+
+                if (userDetails == null || !StructuralComparisons.StructuralEqualityComparer.Equals(userDetails.Password, hashedPass) )
                 {
                     userModel.LoginErrorMessage = "Wrong user name or password.";
                     return View("Index", userModel);

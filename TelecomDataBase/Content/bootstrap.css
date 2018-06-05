@@ -314,7 +314,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
-  color: #333333;
+  color: #fffdfd;
   background-color: #ffffff;
 }
 
@@ -3348,6 +3348,7 @@ input[type="button"].btn-block {
   top: auto;
   bottom: 100%;
   margin-bottom: 1px;
+  
 }
 
 @media (min-width: 768px) {
@@ -4501,7 +4502,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #222222;
+  background-color: #39870C;
   border-color: #080808;
 }
 

@@ -20,8 +20,6 @@ namespace TelecomDataBase.Models
         public int Cantitate { get; set; }
     
         public virtual Client Client { get; set; }
-        public virtual Comanda Comanda1 { get; set; }
-        public virtual Comanda Comanda2 { get; set; }
         public virtual Produ Produ { get; set; }
     }
 }
