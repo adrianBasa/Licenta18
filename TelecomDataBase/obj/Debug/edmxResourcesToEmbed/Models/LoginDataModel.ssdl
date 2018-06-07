@@ -18,7 +18,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdProdus" Type="int" Nullable="false" />
     <Property Name="IdClient" Type="int" Nullable="false" />
     <Property Name="Cantitate" Type="int" Nullable="false" />
@@ -29,7 +29,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nume Produs" Type="varchar" MaxLength="50" />
-    <Property Name="Pret" Type="int" />
+    <Property Name="Pret" Type="money" Nullable="false" />
     <Property Name="Descriere Produc" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="User">
@@ -38,8 +38,9 @@
     </Key>
     <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserName" Type="varchar" MaxLength="50" />
-    <Property Name="Password" Type="varchar" MaxLength="100" />
     <Property Name="IsAdmin" Type="bit" Nullable="false" />
+    <Property Name="Salt" Type="varbinary(max)" />
+    <Property Name="Password" Type="varbinary(max)" />
   </EntityType>
   <Association Name="FK_Comanda_Client">
     <End Role="Client" Type="Self.Client" Multiplicity="1" />
@@ -50,18 +51,6 @@
       </Principal>
       <Dependent Role="Comanda">
         <PropertyRef Name="IdClient" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Comanda_Comanda">
-    <End Role="Comanda" Type="Self.Comanda" Multiplicity="1" />
-    <End Role="Comanda1" Type="Self.Comanda" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Comanda">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Comanda1">
-        <PropertyRef Name="Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -85,10 +74,6 @@
     <AssociationSet Name="FK_Comanda_Client" Association="Self.FK_Comanda_Client">
       <End Role="Client" EntitySet="Client" />
       <End Role="Comanda" EntitySet="Comanda" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Comanda_Comanda" Association="Self.FK_Comanda_Comanda">
-      <End Role="Comanda" EntitySet="Comanda" />
-      <End Role="Comanda1" EntitySet="Comanda" />
     </AssociationSet>
     <AssociationSet Name="FK_Comanda_Produs" Association="Self.FK_Comanda_Produs">
       <End Role="Produs" EntitySet="Produs" />

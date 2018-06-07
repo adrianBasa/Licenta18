@@ -1,42 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TelecomDataBase.Models;
 using TelecomDataBase.Models.ViewModel;
+using TelecomDataBase.Repositories;
 
 namespace TelecomDataBase.Controllers
 {
     public class ClientController : Controller
     {
+        private IRepository repository;
+        public ClientController()
+        {
+            this.repository = new Repository();
+        }
+
+        public ClientController(IRepository repository)
+        {
+            this.repository = repository;
+        }
+
         // GET: Client
         public ActionResult Index()
         {
-            using (AdminLoginEntities dbModel = new AdminLoginEntities())
-            {
-                return View(dbModel.Clients.ToList());
-            }
-            
+          
+                return View(repository.GetAllClients());
+        }
+
+        // GET: Client/NotFound
+        public ActionResult NotFound()
+        {
+
+            return View();
+
         }
 
         // GET: Client/Details/5
         public ActionResult Details(int id)
         {
-            using (AdminLoginEntities dbModel = new AdminLoginEntities())
-            {
-                return View(dbModel.Clients.Where(x=>x.Id==id).FirstOrDefault());
-
-            }
-
-              
+            return View(repository.FindClientById(id));
         }
 
         // GET: Client/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new ClientViewModel());
         }
 
         // POST: Client/Create
@@ -44,20 +57,33 @@ namespace TelecomDataBase.Controllers
         public ActionResult Create(ClientViewModel client)
         {
             try
-            {  using (AdminLoginEntities dbModel = new AdminLoginEntities()) {
-
-                    dbModel.Clients.Add(ConvertClientViewModelToClient(client));
-                    dbModel.SaveChanges();
-                }
-                    // TODO: Add insert logic here
+            {
+                if (IsClientValid(client))
+                {
+                    repository.AddClient(ConvertClientViewModelToClient(client));
 
                     return RedirectToAction("Index");
+                }
+                else
+                    return View(client);
             }
             catch
             {
-                return View();
+                return View(client);
             }
         }
+
+        private bool IsClientValid(ClientViewModel client)
+        {
+            
+                // Validam cu ajutorul anotatiilor
+                var validationContext = new ValidationContext(client, serviceProvider: null, items: null);
+                var validationResults = new List<ValidationResult>();
+
+                var isValid = Validator.TryValidateObject(client, validationContext, validationResults, true);
+                
+            return isValid;
+            }
 
         private Client ConvertClientViewModelToClient(ClientViewModel clientViewModel)
         {
@@ -78,13 +104,12 @@ namespace TelecomDataBase.Controllers
         // GET: Client/Edit/5
         public ActionResult Edit(int id)
         {
-            using (AdminLoginEntities dbModel = new AdminLoginEntities())
+            var client = this.repository.FindClientById(id);
+            if (client == null)
             {
-                return View(dbModel.Clients.Where(x => x.Id == id).FirstOrDefault());
-
+                return RedirectToAction("NotFound");
             }
-
-            
+            return View("Edit", client);   
         }
 
         // POST: Client/Edit/5
@@ -93,13 +118,7 @@ namespace TelecomDataBase.Controllers
         {
             try
             {
-
-                using (AdminLoginEntities dbModel = new AdminLoginEntities())
-                {
-                    dbModel.Entry(client).State = EntityState.Modified;
-                    dbModel.SaveChanges();
-                }
-                    // TODO: Add update logic here
+                repository.SetClietStateToModified(client);
 
                     return RedirectToAction("Index");
             }
@@ -112,11 +131,10 @@ namespace TelecomDataBase.Controllers
         // GET: Client/Delete/5
         public ActionResult Delete(int id)
         {
-            using (AdminLoginEntities dbModel = new AdminLoginEntities())
-            {
-                return View(dbModel.Clients.Where(x => x.Id == id).FirstOrDefault());
+           
+                return View(this.repository.FindClientById(id));
 
-            }
+            
         }
 
         // POST: Client/Delete/5
@@ -125,14 +143,7 @@ namespace TelecomDataBase.Controllers
         {
             try
             {
-
-                using (AdminLoginEntities dbModel = new AdminLoginEntities())
-                {
-                    Client client = dbModel.Clients.Where(x => x.Id == id).FirstOrDefault();
-                    dbModel.Clients.Remove(client);
-                    dbModel.SaveChanges();
-                }
-                    // TODO: Add delete logic here
+                this.repository.DeleteClientById(id);
 
                     return RedirectToAction("Index");
             }

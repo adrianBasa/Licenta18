@@ -19,6 +19,7 @@ namespace TelecomDataBase.Models.ViewModel
         [MaxLength(13)]
         [MinLength(13)]
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Campul CNP este obligatoriu, trebuie sa contina 13 cifre")]
+        [Required(ErrorMessage = "Campul CNP este obligatoriu")]
         public string CNP_CIF { get; set; }
         [Required(ErrorMessage = "Campul Judet este obligatoriu")]
         public string Judet { get; set; }
@@ -33,6 +34,5 @@ namespace TelecomDataBase.Models.ViewModel
         [MinLength(10)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Campul Numar Telefon este obligatoriu, trebuie sa contina 10 cifre")]
         public string Telefon { get; set; }
-
     }
 }
